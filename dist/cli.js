@@ -36,7 +36,6 @@ ws.onopen = () => {
             'value': inputs.slice(2),
             'ttl': null,
         };
-        // console.log(`Received: ${req}`); 
         ws.send(JSON.stringify(req));
         rl.prompt();
     });

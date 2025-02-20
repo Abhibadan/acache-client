@@ -32,16 +32,13 @@ class Acache extends events_1.EventEmitter {
         this.port = port;
         this.#client = new WebSocket(`ws://${host}:${port}`);
         this.#client.onopen = () => {
-            console.log('Connected to server');
             this.emit('open');
             this.#processQueue();
         };
         this.#client.onerror = (e) => {
-            console.error('WebSocket error:', e);
             this.emit('error', e);
         };
         this.#client.onclose = () => {
-            console.log('Connection closed');
             this.emit('close');
         };
         this.#client.onmessage = (e) => {
@@ -50,7 +47,6 @@ class Acache extends events_1.EventEmitter {
                 const { resolve } = this.#queue.shift() || {};
                 if (resolve) {
                     this.#isProcessing = false;
-                    console.log('Res: ', parsedResponse);
                     resolve(parsedResponse);
                 }
             }
@@ -94,7 +90,6 @@ class Acache extends events_1.EventEmitter {
     }
     // Public methods for cache operations
     async sget(key) {
-        console.log('trigger sget', key);
         return this.#reqServer({ event: eventsType.STR_GET, key });
     }
     async nget(key) {
