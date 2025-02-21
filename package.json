@@ -1,6 +1,6 @@
 {
   "name": "acache-client",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "This is the client of acache",
   "main": "./dist/index.js",
   "type": "commonjs",
