@@ -1,6 +1,6 @@
 {
   "name": "acache-client",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "This is the client of acache",
   "main": "./dist/index.js",
   "type": "commonjs",
@@ -29,5 +29,11 @@
   "bugs": {
     "url": "https://github.com/Abhibadan/ncache-client/issues"
   },
-  "homepage": "https://github.com/Abhibadan/ncache-client#readme"
+  "homepage": "https://github.com/Abhibadan/ncache-client#readme",
+    "files": [
+      "dist/",
+      "package.json",
+      "README.md"
+    ]
+  
 }
