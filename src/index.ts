@@ -38,18 +38,18 @@ class Acache extends EventEmitter {
         this.#client = new WebSocket(`ws://${host}:${port}`);
 
         this.#client.onopen = () => {
-            console.log('Connected to server');
+            // console.log('Connected to server');
             this.emit('open');
             this.#processQueue();
         };
 
         this.#client.onerror = (e) => {
-            console.error('WebSocket error:', e);
+            // console.error('WebSocket error:', e);
             this.emit('error', e);
         };
 
         this.#client.onclose = () => {
-            console.log('Connection closed');
+            // console.log('Connection closed');
             this.emit('close');
         };
 
@@ -63,7 +63,8 @@ class Acache extends EventEmitter {
                     resolve(parsedResponse);
                 }
             } catch (error) {
-                console.error('Error parsing response:', error);
+                // console.error('Error parsing response:', error);
+                this.emit('error', error);
                 const { reject } = this.#queue.shift() || {};
                 if (reject) {
                     reject('Error parsing response: ' + error);
@@ -94,7 +95,8 @@ class Acache extends EventEmitter {
             this.#client.send(JSON.stringify(req));
         } catch (error) {
             this.#isProcessing = false;
-            reject('Error sending request: ' + error);
+            this.emit('error', error);
+            // reject('Error sending request: ' + error);
             this.#queue.shift();
             this.#processQueue();
         }
@@ -106,7 +108,6 @@ class Acache extends EventEmitter {
 
     // Public methods for cache operations
     public async sget(key: string): Promise<any> {
-        console.log('trigger sget', key);
         return this.#reqServer({ event: eventsType.STR_GET, key });
     }
 

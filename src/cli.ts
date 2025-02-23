@@ -4,7 +4,7 @@ import readline from 'readline';
 
 let [host, port] = process.argv.slice(2);
 host = host || '127.0.0.1';
-port = port || '5000';
+port = port || '6379';
 const ws = new WebSocket(`ws://${host}:${port}`);
 console.log(`Server connected to ${host}:${port}`);
 
