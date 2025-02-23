@@ -108,73 +108,89 @@ class Acache extends EventEmitter {
 
     // Public methods for cache operations
     public async sget(key: string): Promise<any> {
+        // get string value for corresponding key
         return this.#reqServer({ event: eventsType.STR_GET, key });
     }
 
     public async nget(key: string): Promise<any> {
+        // get number value for corresponding key
         return this.#reqServer({ event: eventsType.NUM_GET, key });
     }
 
     public async bget(key: string): Promise<any> {
+        // get boolean value for corresponding key
         return this.#reqServer({ event: eventsType.BOOL_GET, key });
     }
 
     public async oget(key: string): Promise<any> {
+        // get object value for corresponding key
         return this.#reqServer({ event: eventsType.OBJ_GET, key });
     }
 
     public async sset(key: string, value: string, expire: number | null = null): Promise<any> {
+        // set string value based on corresponding key
         if (typeof value !== 'string') return Promise.reject(new Error('Invalid value'));
         return this.#reqServer({ event: eventsType.STR_SET, key, value, ttl: expire });
     }
 
     public async nset(key: string, value: number, expire: number | null = null): Promise<any> {
+        // set number value based on corresponding key
         if (typeof value !== 'number') return Promise.reject(new Error('Invalid value'));
         return this.#reqServer({ event: eventsType.NUM_SET, key, value, ttl: expire });
     }
 
     public async bset(key: string, value: 0 | 1, expire: number | null = null): Promise<any> {
+        // set boolean value based on corresponding key (provide 0 for false and 1 for true)
         if (![0, 1].includes(value)) return Promise.reject(new Error('Invalid value: Value must be 1 for true and 0 for false'));
         return this.#reqServer({ event: eventsType.BOOL_SET, key, value, ttl: expire });
     }
 
     public async oset(key: string, value: Record<string, any> | any[], expire: number | null = null): Promise<any> {
+        // set object value based on corresponding key
         if (typeof value !== 'object') return Promise.reject(new Error('Invalid value'));
         return this.#reqServer({ event: eventsType.OBJ_SET, key, value, ttl: expire });
     }
 
     public async incr(key: string, value: number | null): Promise<any> {
+        // incriment/decrement number value of seleted key
         if (value && typeof value !== 'number') return Promise.reject(new Error('Invalid value'));
         return this.#reqServer({ event: eventsType.NUM_INCR, key, value });
     }
 
     public async sdel(key: string): Promise<any> {
+        // delete string value using its key name
         return this.#reqServer({ event: eventsType.STR_DEL, key });
     }
 
     public async ndel(key: string): Promise<any> {
+        // delete number value using its key name
         return this.#reqServer({ event: eventsType.NUM_DEL, key });
     }
 
     public async bdel(key: string): Promise<any> {
+        // delete boolean value using its key name
         return this.#reqServer({ event: eventsType.BOOL_DEL, key });
     }
 
     public async odel(key: string): Promise<any> {
+        // delete object value using its key name
         return this.#reqServer({ event: eventsType.OBJ_DEL, key });
     }
 
     public async sttl(type: dataType, key: string, expire: number | null = null): Promise<any> {
+        // set ttl of a key
         if (!['str', 'num', 'bool', 'obj'].includes(type)) return Promise.reject(new Error('Invalid type, Type must be in str, num, bool or obj'));
         return this.#reqServer({ event: eventsType.SET_TTL, key: type, value: [key, expire] });
     }
 
     public async rttl(type: dataType, key: string): Promise<any> {
+        // remove ttl of a key
         if (!['str', 'num', 'bool', 'obj'].includes(type)) return Promise.reject(new Error('Invalid type, Type must be in str, num, bool or obj'));
         return this.#reqServer({ event: eventsType.GET_TTL, key: type, value: [key] });
     }
 
     public async gttl(type: dataType, key: string): Promise<any> {
+        // get ttl of a key
         if (!['str', 'num', 'bool', 'obj'].includes(type)) return Promise.reject(new Error('Invalid type, Type must be in str, num, bool or obj'));
         return this.#reqServer({ event: eventsType.REM_TTL, key: type, value: [key] });
     }
