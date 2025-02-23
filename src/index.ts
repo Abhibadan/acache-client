@@ -33,7 +33,7 @@ class Acache extends EventEmitter {
     #queue: Array<{ req: cacheRequest, resolve: (value: any) => void, reject: (reason?: any) => void }> = [];
     #isProcessing: boolean = false;
 
-    constructor(private host: string = "127.0.0.1", private port: number = 5000) {
+    constructor(private host: string = "127.0.0.1", private port: number = 6379) {
         super();
         this.#client = new WebSocket(`ws://${host}:${port}`);
 

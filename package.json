@@ -30,10 +30,17 @@
     "url": "https://github.com/Abhibadan/ncache-client/issues"
   },
   "homepage": "https://github.com/Abhibadan/ncache-client#readme",
-    "files": [
-      "dist/",
-      "package.json",
-      "README.md"
-    ]
+  "keywords": [
+    "acache",
+    "client",
+    "cache",
+    "distributed",
+    "nodejs"
+  ],
+  "files": [
+    "dist/",
+    "package.json",
+    "README.md"
+  ]
   
 }
