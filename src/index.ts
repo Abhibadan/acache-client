@@ -59,7 +59,7 @@ class Acache extends EventEmitter {
                 const { resolve } = this.#queue.shift() || {};
                 if (resolve) {
                     this.#isProcessing=false;
-                    console.log('Res: ',parsedResponse);
+                    // console.log('Res: ',parsedResponse);
                     resolve(parsedResponse);
                 }
             } catch (error) {
