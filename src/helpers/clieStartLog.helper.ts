@@ -12,7 +12,7 @@ const cliStartupLog=(host: String, port: String): void =>{
 
  Connected to: ${host}:${port}
 
-  Type 'help' to see available commands. 📜✨
+ Type 'help' to see available commands. 📜✨
 
  Type 'exit ' to terminate.👋
     `);
