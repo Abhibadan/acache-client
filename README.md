@@ -73,13 +73,13 @@ acache-cli 127.0.0.1 6379
 If the package is not installed globally, use:
 
 ```bash
-npx acache-cli
+npx acache-client
 ```
 
 Or with a custom host and port:
 
 ```bash
-npx acache-cli host port
+npx acache-client host port
 ```
 
 #### CLI Command Examples
