@@ -18,7 +18,7 @@
     "@types/node": "^22.12.0"
   },
   "bin": {
-    "acache-cli": "dist/cli.js"
+    "acache-client": "dist/cli.js"
   },
   "repository": {
     "type": "git",

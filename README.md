@@ -57,17 +57,17 @@ main();
 To use the CLI tool, ensure that [**acache-server**](https://www.npmjs.com/package/acache-server) is running. Then, start the CLI with:
 
 ```bash
-acache-cli
+acache-client
 ```
 
 By default, it connects to `127.0.0.1:6379`. To specify a custom host and port:
 
 ```bash
-acache-cli host port
+acache-client host port
 ```
 Example,
 ```bash
-acache-cli 127.0.0.1 6379
+acache-client 127.0.0.1 6379
 ```
 
 If the package is not installed globally, use:
