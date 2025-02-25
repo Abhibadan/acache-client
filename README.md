@@ -131,7 +131,7 @@ Server connected to 127.0.0.1:6379
 | `ndel(key)` | Delete a number key |
 | `bdel(key)` | Delete a boolean key |
 | `odel(key)` | Delete an object key |
-| `sttl(type, key, ttl optional)` | Set TTL for a key (type: `str`, `num`, `bool`, `obj`) |
+| `sttl(type, key, ttl)` | Set TTL for a key (type: `str`, `num`, `bool`, `obj`) |
 | `rttl(type, key)` | Remove TTL for a key |
 | `gttl(type, key)` | Get remaining TTL for a key |
 
