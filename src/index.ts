@@ -183,13 +183,13 @@ class Acache extends EventEmitter {
         return this.#reqServer({ event: eventsType.SET_TTL, key: type, value: [key, expire] });
     }
 
-    public async rttl(type: dataType, key: string): Promise<any> {
+    public async gttl(type: dataType, key: string): Promise<any> {
         // remove ttl of a key
         if (!['str', 'num', 'bool', 'obj'].includes(type)) return Promise.reject(new Error('Invalid type, Type must be in str, num, bool or obj'));
         return this.#reqServer({ event: eventsType.GET_TTL, key: type, value: [key] });
     }
 
-    public async gttl(type: dataType, key: string): Promise<any> {
+    public async rmttl(type: dataType, key: string): Promise<any> {
         // get ttl of a key
         if (!['str', 'num', 'bool', 'obj'].includes(type)) return Promise.reject(new Error('Invalid type, Type must be in str, num, bool or obj'));
         return this.#reqServer({ event: eventsType.REM_TTL, key: type, value: [key] });

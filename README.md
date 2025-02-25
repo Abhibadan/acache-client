@@ -36,17 +36,36 @@ cache.on('open', () => console.log(`Caching is running on ${host}:${port}`))
     .on('close', () => console.log('Connection closed'));
 
 async function main() {
-    await cache.sset('key1', 'string value1', 50);
-    console.log(await cache.sget('key1')); // Output: string value1
+    
+    await cache.nset('key', 5);
+    console.log("value of key as number : ",await cache.nget('key')); // Output: number 5
 
-    await cache.nset('key1', 5);
-    console.log(await cache.nget('key1')); // Output: number 5
+    await cache.sset('key', 'string value', 50);
+    console.log("value of key as string : ",await cache.sget('key')); // Output: string value
 
-    await cache.sttl('num', 'key1'); // Set TTL for number
-    console.log(await cache.gttl('str', 'key1')); // Output: remaining TTL of key1
+    await cache.bset('key', 1);
+    console.log("value of key as string : ",await cache.bget('key')); // Output: true
 
-    await cache.rttl('str', 'key1'); // Remove TTL for key1 of string
-    console.log(await cache.gttl('str', 'key1')); // Output: null
+    await cache.oset('key',
+        {
+            "name":"Jhon",
+            "age":20,
+            "hobby":["Football","Cricket","Party"],
+            "address":{
+                "city":"Los Angeles",
+                "state":"California",
+                "country":"United States"
+            }
+        });
+    console.log("value of key as object : ",await cache.oget('key')); // Output: { name: 'Jhon', age: 20, hobby: [ 'Football', 'Cricket', 'Party' ], address: { city: 'Los Angeles', state: 'California', country: 'United States' } }
+    
+    await cache.sttl('num', 'key', 50); // Set TTL for number and return true on success
+
+    console.log("TTL of key when it is string : ",await cache.gttl('str', 'key')); // Output: remaining TTL of key
+    console.log("TTL of key when it is number : ",await cache.gttl('num', 'key')); // Output: remaining TTL of key
+
+    await cache.rmttl('str', 'key'); // Remove TTL for key of string
+    console.log("TTL of key when it is string : ",await cache.gttl('str', 'key')); // Output: null
 }
 
 main();
@@ -132,7 +151,7 @@ Server connected to 127.0.0.1:6379
 | `bdel(key)` | Delete a boolean key |
 | `odel(key)` | Delete an object key |
 | `sttl(type, key, ttl)` | Set TTL for a key (type: `str`, `num`, `bool`, `obj`) |
-| `rttl(type, key)` | Remove TTL for a key |
+| `rmttl(type, key)` | Remove TTL for a key |
 | `gttl(type, key)` | Get remaining TTL for a key |
 
 ## License
